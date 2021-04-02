@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='pl'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Kalkulator Podatkowy</title>
+    <link rel='stylesheet' href='styles/fontello/css/fontello.css'>
+    <link rel='stylesheet' href='styles/fonts/fonts.css'>
+    <link rel='stylesheet' href='styles/main.css'>
+    <link rel='stylesheet' href='styles/desktop.css'>
+    <link rel='stylesheet' href='styles/nav.css'>
+</head>
+
+<body>
+    <!-- switch for day/light mode -->
+    <nav>
+        <i class='icon-sun'></i>
+        <label class='switch'>
+            <input type='checkbox' onchange='update_colors(event)'>
+            <span class='slider round'></span>
+        </label>
+        <i class='icon-moon'></i>
+    </nav>
+    <div id='content'>
+        <section id='title'>
+            <h1>Kalkulator Podatków Dochodowych</h1>
+        </section>
+        <section id='services'>
+            <a href='trading212.html'>Trading212</a>
+            <a href='coinbase.html'>Coinbase</a>
+        </section>
+    </div>
+
+    <script type='text/javascript' src='scripts/variables.js'></script>
+    <script type='text/javascript' src='scripts/colors.js'></script>
+    <script> update_colors(null) </script>
+</body>
+
+</html>

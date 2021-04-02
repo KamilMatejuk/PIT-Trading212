@@ -1,0 +1,170 @@
+@media screen and (min-width: 1000px) {
+    h3 {
+        padding: 2%;
+    }
+
+    h4,
+    h5 {
+        margin: 1%;
+    }
+
+    #content {
+        padding-bottom: 10vh;
+    }
+
+    .slider:before {
+        bottom: 0;
+    }
+
+    section#title {
+        height: 65vh;
+    }
+
+    section#title h1 {
+        font-size: 2.5em;
+    }
+
+    section#title p {
+        margin: 1% 7%;
+    }
+
+    section#upload .box {
+        height: 30vh;
+    }
+
+    section#services {
+        flex-direction: row;
+    }
+
+    section#faq summary h4,
+    section#faq summary i {
+        margin: 1% 0;
+    }
+
+    section#faq img:nth-of-type(1),
+    section#faq img:nth-of-type(2),
+    section#faq img:nth-of-type(3),
+    section#faq img:nth-of-type(4) {
+        width: 60%;
+        margin: 3% 20%;
+    }
+
+    section#faq img:nth-of-type(5),
+    section#faq img:nth-of-type(6),
+    section#faq img:nth-of-type(7),
+    section#faq img:nth-of-type(8) {
+        width: 30%;
+        margin: 3% 35%;
+    }
+
+    section#faq details>*:last-child {
+        margin-bottom: 3%;
+    }
+
+    section#stock-detail-table p {
+        padding-bottom: 1%;
+    }
+
+    section#stock-detail-table>div {
+        width: 100%;
+    }
+
+    section#stock-detail-table table {
+        border-spacing: 0;
+        border: 1px solid var(--text-color);
+    }
+
+    section#stock-detail-table table th {
+        border: 1px solid var(--text-color);
+        padding: 1%;
+    }
+
+    section#stock-detail-table table td {
+        text-align: center;
+        border: 1px solid var(--bg-color);
+        padding: 1%;
+    }
+
+    section#stock-detail-table table tr:nth-of-type(1) th:nth-of-type(1),
+    section#stock-detail-table table tr:nth-of-type(1) th:nth-of-type(2) {
+        width: 40%;
+    }
+
+    section#stock-detail-table table tr:nth-of-type(1) th:nth-of-type(3),
+    section#stock-detail-table table tr:nth-of-type(1) th:nth-of-type(4) {
+        width: 10%;
+    }
+
+    section#stock-detail-table table tr:nth-of-type(2) th:nth-of-type(1),
+    section#stock-detail-table table tr:nth-of-type(2) th:nth-of-type(4) {
+        width: 15%;
+    }
+
+    section#stock-detail-table table tr:nth-of-type(2) th:nth-of-type(2),
+    section#stock-detail-table table tr:nth-of-type(2) th:nth-of-type(3),
+    section#stock-detail-table table tr:nth-of-type(2) th:nth-of-type(5),
+    section#stock-detail-table table tr:nth-of-type(2) th:nth-of-type(6) {
+        width: 7%;
+    }
+
+    section#taxes .pit-38-g,
+    section#taxes .pit-38-c {
+        max-width: 800px;
+        margin: auto;
+    }
+
+    section#taxes .pit-38-g>div:nth-child(2) {
+        grid-template-columns: 4fr 1fr;
+    }
+
+    section#taxes .pit-38-g>div:nth-child(2)>p {
+        padding: 0.3em;
+    }
+
+    section#taxes h5 {
+        margin-top: 2%;
+    }
+
+    section#taxes .pit-38-c>div:nth-child(2) {
+        grid-template-columns: 2fr repeat(4, 1fr);
+    }
+
+    section#taxes .pit-38-c>div:nth-child(2)>* {
+        text-align: left;
+        width: 100%;
+    }
+
+    section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(18),
+    section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(19),
+    section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(20),
+    section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(21),
+    section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(22),
+    section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(23) {
+        height: 2em;
+    }
+
+    section#taxes .pit-38-g>div:nth-child(2)>div .nr {
+        margin: 0;
+    }
+
+    section#taxes .pit-zg-b>div:nth-child(2) {
+        height: 3em;
+    }
+
+    section#taxes .pit-38-g>div:nth-child(2)>div .tax {
+        height: 100%;
+    }
+
+    section#taxes .pit-zg-b>div:nth-child(2) .tax {
+        top: 50% !important;
+    }
+
+    section#contact input, section#contact textarea {
+        margin: 1% 0;
+    }
+
+    section#contact form>div input {
+        width: 5vw;
+        margin: 0;
+    }
+}

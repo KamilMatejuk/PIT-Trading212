@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang='pl'>
+
+<!-- todo darmowe akcje oznaczane są jako depozyty o takiej samej wartości -->
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Trading212 - Podatki</title>
+    <link rel='stylesheet' href='styles/fontello/css/fontello.css'>
+    <link rel='stylesheet' href='styles/fonts/fonts.css'>
+    <link rel='stylesheet' href='styles/main.css'>
+    <link rel='stylesheet' href='styles/desktop.css'>
+    <link rel='stylesheet' href='styles/nav.css'>
+</head>
+
+<body>
+    <!-- switch for day/light mode -->
+    <nav>
+        <i class='icon-sun'></i>
+        <label class='switch'>
+            <input type='checkbox' onchange='update_colors(event)'>
+            <span class='slider round'></span>
+        </label>
+        <i class='icon-moon'></i>
+    </nav>
+    <div id='content'>
+        <section id='title'>
+            <h1>Kalkulator Podatków Dochodowych<br />
+                z Trading212 © *</h1>
+            <p>* Poniższa stronie nie jest w żaden sposób powiązana ani wspierana przez <em>©Trading 212 Ltd.</em>,
+                jest jedynie personalnym projektem użytkownika, który zmęczył się manualnym liczeniem podatków.</p>
+        </section>
+        <section id='upload'>
+            <div class='box'>
+                <div>
+                    <h3>Wgraj pliki</h3>
+                </div>
+                <input type='file' id='tax-files' accept='.csv' onchange='start_workload()' multiple>
+            </div>
+        </section>
+        <section id='faq'>
+            <h3>FAQ</h3>
+            <!-- skąd i jak pobrać pliki do wgrania -->
+            <details>
+                <summary>
+                    <h4>Skąd i jak pobrać odpowiednie pliki?</h4>
+                    <i class='icon-down-open'></i>
+                </summary>
+                <p>
+                    Aby wyliczyć dane podatkowe, nawet tylko dla ostatniego roku podatkowego, ważna jest <span>cała
+                        historia transakcji od początku aktywności konta</span>.
+                    Można ją pobrać z poziomu swojego konta.<br /><br />
+                    Niestety na raz można pobrać maksymalnie okres 12 miesięcy. Oznacza to że w większości przypadków
+                    potrzebne będzie wygenerowanie kilku plików.
+                    Dobrą metodą jest pobranie osobnego pliku za każdy rok (tj. od 1 stycznia danego roku do 31 grudnia
+                    danego roku).
+                    Następnie należy wgrać wszystkie pobrane pliki.</p>
+                <h4>Pobieranie ze strony internetowej:</h4>
+                <p>1. Zaloguj się na swoje konto <a href='https://live.trading212.com/'>Trading212</a></p>
+                <p>2. Kliknij ikonkę INV w prawym górnym rogu strony</p>
+                <img src='imgs/trading212-light-desktop-instruction1.png' />
+                <p>3. Wybierz opcję historia</p>
+                <img src='imgs/trading212-light-desktop-instruction2.png' />
+                <p>4. Kliknij ikonę pobierania</p>
+                <img src='imgs/trading212-light-desktop-instruction3.png' />
+                <p>5. Wybierz ramy czasowe</p>
+                <img src='imgs/trading212-light-desktop-instruction4.png' />
+                <p>6. Wyeksportuj do pliku CSV</p>
+                <h4>Pobieranie z aplikacji mobilnej:</h4>
+                <p>1. Zaloguj się do aplikacji <a
+                        href='https://play.google.com/store/apps/details?id=com.avuscapital.trading212&hl=pl'>Trading212</a>
+                </p>
+                <p>2. Kliknij ikonkę opcji w prawym dolnym rogu</p>
+                <img src='imgs/trading212-light-mobile-instruction1.png' />
+                <p>3. Wybierz opcję historia</p>
+                <img src='imgs/trading212-light-mobile-instruction2.png' />
+                <p>4. Kliknij ikonę pobierania</p>
+                <img src='imgs/trading212-light-mobile-instruction3.png' />
+                <p>5. Wybierz ramy czasowe</p>
+                <img src='imgs/trading212-light-mobile-instruction4.png' />
+                <p>6. Wyeksportuj do pliku CSV</p>
+            </details>
+            <!-- co jest wyliczone -->
+            <details>
+                <summary>
+                    <h4>Jakie informacje zostaną wyliczone?</h4>
+                    <i class='icon-down-open'></i>
+                </summary>
+                <p>
+                    Poniższy kalkulator pozwoli pokazać statystyki z całego okresu aktywności konta, bądź osobno z
+                    każdego roku podatkowego.<br /><br />
+                    Część statystyk przedstawiona zostanie za pomocą wykresu, aby łatwiej zauważyć zależności i schematy
+                    w swoim zarządzaniu akcjami.<br /><br />
+                    Między innymi zostaną wyliczone:
+                </p>
+                <ul>
+                    <li>wpłacone i wypłacone środki</li>
+                    <li>zyski z dywidend i akcji</li>
+                    <li>łączny zysk z tranasakcji zyskownych</li>
+                    <li>największy zysk z jednej tranasakcji</li>
+                    <li>średni zysk z jednej tranasakcji</li>
+                    <li>łączna strata z tranasakcji stratnych</li>
+                    <li>największa strata z jednej tranasakcji</li>
+                    <li>średnia strata z jednej tranasakcji</li>
+                    <li>zyski i straty z podziałem na akcje</li>
+                    <li>łączny dochód w roku podatkowym</li>
+                    <li>łączny koszt w roku podatkowym</li>
+                    <li>łączny przychód w roku podatkowym</li>
+                    <li>podatek do zapłacenia</li>
+                </ul>
+                <p>Dodatkowo zostanie pokazane jak wypełnić zeznania PIT - dokładnie w które pola wpisać jakie wartośći.
+                </p>
+            </details>
+            <!-- czy jest to porada prawna -->
+            <details>
+                <summary>
+                    <h4>Czy jest to porada prawna?</h4>
+                    <i class='icon-down-open'></i>
+                </summary>
+                <p>
+                    Powyższy kalkulator jest jedynie personalnym projektem mającym na celu wspomóc Polskich użytkowników
+                    serwisu
+                    Trading212 w wyliczaniu podatków i uzupełnianiu zeznań podatkowych. Wyliczone dane nie stanowią
+                    porady prawnej
+                    w żaden sposób. Wyniki wykorzystywane są na Twoją własną odpowiedzialność.
+                </p>
+            </details>
+            <!-- czy dane są bezpieczne -->
+            <details>
+                <summary>
+                    <h4>Czy dane są bezpieczne?</h4>
+                    <i class='icon-down-open'></i>
+                </summary>
+                <p>
+                    Dane z wgranych plików nie są nigdzie przesyłane, wszystkie obliczenia wykonywane są w twojej
+                    przeglądarce. Pliki zatem nie opuszczają Twojego komputera.
+                </p>
+            </details>
+            <!-- jak liczone -->
+            <details>
+                <summary>
+                    <h4>W jaki sposób wyliczane są podatki?</h4>
+                    <i class='icon-down-open'></i>
+                </summary>
+                <p>
+                    Upewnij się że posiadasz ważny formularz
+                    <a
+                        href='https://helpcentre.trading212.com/hc/en-us/articles/360007139318-How-to-fill-in-a-W-8BEN-Form-'>W-8BEN</a><br /><br />
+                    Podatki wynikające z transakcji giełdowych rozliczane są na podstawie podatku od zysków kapitałowych
+                    (19%).<br />
+                    Początkowo każda operacja przeliczana jest z PLN zgodnie z kursem z poprzedniego otwartego dnia
+                    rynkowego.
+                    Następnie zyski z transakcji liczone są zgodnie z kolejnością first-in-first-out - pierwsza operacja
+                    sprzedaży
+                    parowana jest z pierwszą operacją kupna.<br /><br />
+                    Podatki z przychodów z dywidend częściowo został już pobrany przy otrzymaniu dywidendy. Podatek jaki
+                    powinien
+                    zostać zapłacony wynosi 19%, zatem podczas rozliczenia podatkowego należy dopłacić jedynie
+                    różnicę.<br /><br />
+                    Źródła informacji:<br />
+                </p>
+                <ul>
+                    <li><a
+                            href='https://jakoszczedzacpieniadze.pl/jak-rozliczyc-podatek-od-dywidendy-zagranicznej-i-zysk-na-akcjach-jaki-pit'>Jak
+                            rozliczyć podatek od dywidendy zagranicznej i zysk na akcjach</a></li>
+                    <li><a href='https://www.najlepszekonto.pl/jak-poprawnie-rozliczyc-podatek-od-zyskow-kapitalowych'>Jak
+                            poprawnie rozliczyć podatek od zysków kapitałowych</a></li>
+                    <li><a href='https://forex-nawigator.biz/forum/post824020.html#p824020'>Oficjalne forum
+                            Trading212</a></li>
+                    <li><a
+                            href='https://helpcentre.trading212.com/hc/en-us/articles/360007080857-Do-you-charge-any-taxes-on-profits-'>Help
+                            Center: Do you charge any taxes on profits?</a></li>
+                    <li><a href='https://helpcentre.trading212.com/hc/en-us/articles/360007080877-W-8BEN'>Help Center:
+                            W-8BEN</a></li>
+                    <li><a
+                            href='https://helpcentre.trading212.com/hc/en-us/articles/360007139318-How-to-fill-in-a-W-8BEN-Form-'>Help
+                            Center: How to fill in a W-8BEN Form?</a></li>
+                </ul>
+            </details>
+            <!-- kto jest twórcą -->
+            <details>
+                <summary>
+                    <h4>Kto jest twórcą?</h4>
+                    <i class='icon-down-open'></i>
+                </summary>
+                <p>
+                    Twórcą kalkulatora jest Kamil Matejuk - użytkownik serwisu Trading212 od 2019 roku, który zmęczył
+                    się ręcznym liczeniem podatków, oraz postanowił stworzyć narzędzie wyliczające najróżniejsze
+                    statystyki dotyczące transakcji.
+                </p>
+                <p>
+                    Jeżeli spodobało ci sie to narzędzie i uważasz je za przydatne, możesz mnie wesprzeć poprzez
+                    <a href='https://www.paypal.com/paypalme/kamilimak' target="_blank">Paypal</a>.
+                </p>
+            </details>
+        </section>
+        <section id='timeframe'>
+            <form>
+                <!-- fill in js -->
+            </form>
+        </section>
+        <section id='all-stats' class='all-stats'>
+            <h3>Statystyki Ogólne</h3>
+            <h4>Transfery</h4>
+            <div id='stats-transfers-money-in'>
+                <p class="text">Wpłacone środki</p>
+                <p class="value">X zł</p>
+            </div>
+            <div id='stats-transfers-money-out'>
+                <p class="text">Wypłacone środki</p>
+                <p class="value">X zł</p>
+            </div>
+            <h4>Dywidendy</h4>
+            <div id='stats-dividends-profit'>
+                <p class="text">Łączny zysk</p>
+                <p class="value">X zł</p>
+            </div>
+            <h4>Akcje</h4>
+            <div id='stats-stocks-buy-nr'>
+                <p class="text">Liczba wykonanych operacji kupna</p>
+                <p class="value">X</p>
+            </div>
+            <div id='stats-stocks-sell-nr'>
+                <p class="text">Liczba wykonanych operacji sprzedaży</p>
+                <p class="value">X</p>
+            </div>
+            <div id='stats-stocks-percent-profit'>
+                <p class="text">Procent transakcji zamkniętych z zyskiem</p>
+                <p class="value">X %</p>
+            </div>
+            <div id='stats-stocks-profit'>
+                <p class="text">Łączny zysk z tych transakcji</p>
+                <p class="value">X zł</p>
+            </div>
+            <div id='stats-stocks-biggest-profit'>
+                <p class="text">Największy zysk z tych transakcji</p>
+                <p class="value">X zł</p>
+            </div>
+            <div id='stats-stocks-avg-profit'>
+                <p class="text">Średni zysk z tych transakcji</p>
+                <p class="value">X zł</p>
+            </div>
+            <div id='stats-stocks-percent-loss'>
+                <p class="text">Procent transakcji zamkniętych ze stratą</p>
+                <p class="value">X %</p>
+            </div>
+            <div id='stats-stocks-loss'>
+                <p class="text">Łączna strata z tych transakcji</p>
+                <p class="value">X zł</p>
+            </div>
+            <div id='stats-stocks-biggest-loss'>
+                <p class="text">Największa strata z tych transakcji</p>
+                <p class="value">X zł</p>
+            </div>
+            <div id='stats-stocks-avg-loss'>
+                <p class="text">Średnia strata z tych transakcji</p>
+                <p class="value">X zł</p>
+            </div>
+            <div id='stats-stocks-overall-profit-loss'>
+                <p class="text">Ogólny zysk/strata</p>
+                <p class="value">X zł</p>
+            </div>
+            <div id='stats-stocks-avg-profit-loss'>
+                <p class="text">Średni zysk/strata z jednej transakcji</p>
+                <p class="value">X zł</p>
+            </div>
+        </section>
+        <section id="all-graphs">
+            <h3>Wykresy</h3>
+            <!-- jak zmieniał sie stan majątkowy, na podstawie wszystkiego (wpłaty / wypłaty / kupna / sprzedaże / dywidendy) -->
+            <h4>Stan konta</h4>
+            <p>Jak zmieniał się stan konta z miesiąca na miesiąc. Powyższy wykres bierze pod uwagę wpłaty i wypłaty
+                środków,
+                otrzymywane dywidendy, oraz kupna i sprzedaże akzji.</p>
+            <canvas id="graph-balance" width="400" height="200"></canvas>
+            <!-- po prostu ilość wszytskich operacji kupna / sprzedaży -->
+            <h4>Ilość operacji</h4>
+            <p>Ilość wszystkich wykonanych operacji kupna i sprzedaży z podziałem na miesiące.</p>
+            <canvas id="graph-operations" width="400" height="200"></canvas>
+            <!-- dwa słupki, jeden na drugim, zyskowne i stratne transakcje -->
+            <h4>Ilość transakcji</h4>
+            <p>Ilość transakcji w kolejnych miesiącach. Transakcje zyskowne oznaczono na zielono wartościami dodatnimi,
+                natomiast tranasakcje stratne na czerwono, a ich ilość jest wartością ujemną.</p>
+            <canvas id="graph-transactions" width="400" height="200"></canvas>
+        </section>
+        <section id='stock-select'>
+            <h3>Podsumowanie<br />poszczególnych akcji</h3>
+            <div class="select">
+                <select onchange='selected_stock(event)'>
+                </select>
+            </div>
+            <h4 id='stock-select-name'></h4>
+            <p class='stock-name'></p>
+        </section>
+        <section id='stock-detail-operations'>
+            <h4>Historia operacji</h4>
+            <div>
+                <!-- fill in js -->
+            </div>
+        </section>
+        <section id='stock-detail-stats' class='all-stats'>
+            <h4>Statystyki</h4>
+            <div id='stats-detail-buy-operations'>
+                <p class="text">Ilość operacji kupna</p>
+                <p class="value">X</p>
+            </div>
+            <div id='stats-detail-buy-actions'>
+                <p class="text">Ilość kupionych akcji</p>
+                <p class="value">X</p>
+            </div>
+            <div id='stats-detail-sell-operations'>
+                <p class="text">Ilość operacji sprzedaży</p>
+                <p class="value">X</p>
+            </div>
+            <div id='stats-detail-sell-actions'>
+                <p class="text">Ilość sprzedanych akcji</p>
+                <p class="value">X</p>
+            </div>
+            <div id='stats-detail-transactions'>
+                <p class="text">Ilość transakcji</p>
+                <p class="value">X</p>
+            </div>
+            <div id='stats-detail-biggest-profit'>
+                <p class="text">Największy zysk z jednej transakcji</p>
+                <p class="value">X</p>
+            </div>
+            <div id='stats-detail-biggest-loss'>
+                <p class="text">Największa strata z jednej transakcji</p>
+                <p class="value">X</p>
+            </div>
+            <div id='stats-detail-average-profit'>
+                <p class="text">Średni zysk / strata z jednej transakcji</p>
+                <p class="value">X</p>
+            </div>
+            <div id='stats-detail-overall-profit-loss'>
+                <p class="text">Łączny zysk / strata</p>
+                <p class="value">X</p>
+            </div>
+        </section>
+        <section id='stock-detail-table'>
+            <h4>Dane transakcji do skopiowania</h4>
+            <p>Poniższa tabela pokazuje dane związane z każdą transakcją, na potrzeby księgowości.</p>
+            <p>Transakcje zostały rozbite na mniejsze transakcje, w taki sposób, aby każdy rekord dotyczył takiej samej
+                ilości akcji.
+                Na przykład jeżeli wykonano 2 operacje kupna po 1 akcji, a nastepnie naraz sprzedano obie akcje, w
+                tabeli zostaną pokazane 2 transakcje,
+                po jednej dla każdej akcji.</p>
+            <div>
+                <!-- to fill in js -->
+            </div>
+        </section>
+        <section id='taxes'>
+            <h3>Podatki</h3>
+            <h4>Dywidendy</h4>
+            <div>
+                <p>
+                    Łącznie z dywidend otrzymano <span id='dividends-all'>X</span>.
+                    Od tej kwoty należy zapłacić podatek 19%, równy <span id='dividends-tax'>X</span>.
+                    Państwa ojczyste niektórych firm pobierają domyślnie część podatku.
+                    W tym wypadku pobrano już <span id='dividends-tax-taken'>X</span>.
+                    Oznacza to, że do zapłaty zostało <span id='dividends-tax-left'>X</span>.
+                </p>
+                <h5>Wypełnienie oświadczenia PIT-38</h5>
+                <div class='pit-38-g'>
+                    <div>G. KWOTA DO ZAPŁATY</div>
+                    <div>
+                        <p>Zryczałtowany podatek dochodowy, o którym mowa w art. 29, 30 i 30a ustawy, jeżeli podatek ten
+                            nie
+                            został pobrany
+                            przez płatnika, z wyjątkiem podatku wykazanego w poz. 45 i 46 oraz w części H (po
+                            zaokrągleniu
+                            do pełnych złotych)</p>
+                        <div>
+                            <p class='nr'>44.</p>
+                            <p class='tax'></p>
+                        </div>
+                        <p>Zryczałtowany podatek obliczony od przychodów (dochodów), o których mowa w art. 30a ust. 1
+                            pkt
+                            1-5 ustawy,
+                            uzyskanych poza granicami Rzeczypospolitej Polskiej</p>
+                        <div>
+                            <p class='nr'>45.</p>
+                            <p class='tax' id='tax45'>X</p>
+                        </div>
+                        <p>Podatek zapłacony za granicą, o którym mowa w art. 30a ust. 9 ustawy (przeliczony na złote)
+                        </p>
+                        <div>
+                            <p class='nr'>46.</p>
+                            <p class='tax' id='tax46'>X</p>
+                        </div>
+                        <p>Różnica między zryczałtowanym podatkiem a podatkiem zapłaconym za granicą (po zaokrągleniu do
+                            pełnych złotych)</p>
+                        <div>
+                            <p class='nr'>47.</p>
+                            <p class='tax' id='tax47'>X</p>
+                        </div>
+                        <p>KWOTA DO ZAPŁATY</p>
+                        <div>
+                            <p class='nr'>48.</p>
+                            <p class='tax' id='tax48'>X</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4>Akcje</h4>
+            <div>
+                <p>
+                    Łącznie ze sprzedaży akcji otrzymano <span id='stocks-p'>X</span> przychodu.
+                    Kupując akcje poniesiono łączny koszt <span id='stocks-k'>X</span>.
+                    Po odjęciu wartości otrzymano <span id='stocks-ds'>X</span>.
+                </p>
+                <h5>Wypełnienie oświadczenia PIT-38</h5>
+                <div class='pit-38-c'>
+                    <div>C. DOCHODY / STRATY - ART. 30B UST. 1 USTAWY</div>
+                    <div>
+                        <p>Źródło przychodów</p>
+                        <p>Przychód</p>
+                        <p>Koszty uzyskania przychodu</p>
+                        <p>Dochód</p>
+                        <p>Strata</p>
+                        <p>a</p>
+                        <p>b</p>
+                        <p>c</p>
+                        <p>d</p>
+                        <p>e</p>
+                        <p>1. Przychody wykazane w części D informacji PIT-8C</p>
+                        <p>2. Inne przychody</p>
+                        <p>3. Razem</p>
+                        <p></p>
+                        <p></p>
+                        <div>
+                            <p class='nr'>20.</p>
+                            <p class='tax'></p>
+                        </div>
+                        <div>
+                            <p class='nr'>21.</p>
+                            <p class='tax'></p>
+                        </div>
+                        <div>
+                            <p class='nr'>22.</p>
+                            <p class='tax' id='tax22'>X</p>
+                        </div>
+                        <div>
+                            <p class='nr'>23.</p>
+                            <p class='tax' id='tax23'>X</p>
+                        </div>
+                        <div>
+                            <p class='nr'>24.</p>
+                            <p class='tax' id='tax24'>X</p>
+                        </div>
+                        <div>
+                            <p class='nr'>25.</p>
+                            <p class='tax' id='tax25'>X</p>
+                        </div>
+                        <div>
+                            <p class='nr'>26.</p>
+                            <p class='tax' id='tax26'>X</p>
+                        </div>
+                        <div>
+                            <p class='nr'>27.</p>
+                            <p class='tax' id='tax27'>X</p>
+                        </div>
+                    </div>
+                </div>
+                <p>Dodatkowo należy wypełnić załącznik <strong>PIT/ZG</strong> osobno dla każdego państwa z którego
+                    uzyskano
+                    zarobki.</p>
+                <h5>Wypełnienie oświadczenia PIT/ZG</h5>
+                <div class='pits-zg'>
+                    <!-- fill in js -->
+                </div>
+            </div>
+        </section>
+        <section id="contact">
+            <h3>Znalazłeś błąd?</h3>
+            <p>Podczas tworzenia strony dołożono wszelkich starań aby wszystkie wyliczenia działały dla
+                każdego możliwego przypadku. Jeżeli mimo to napodkałeś/aś błąd, proszę wypełnij poniższy formularz
+                abyśmy mogli go naprawić jak najszybciej.</p>
+            <form onsubmit='send_email(event)' id='contact-form'>
+                <input type='email' placeholder='Twój adres email do kontaktu' name='mail'>
+                <textarea form='contact-form' rows='10' placeholder='Opis błędu' name='desc' required></textarea>
+                <div>
+                    <input type='checkbox' id='contact-logs' name='logs' checked>
+                    <label for='contact-logs'>Załącz dane sesji, zawierające m.in. załączone pliki. Powoli to na
+                        dokładne zreprodukowanie błędu. Dane te nie są udostępniane osobom trzecim, wykorzystywane są
+                        tylko do naprawienia zgłoszonego błędu a następnie usuwane.</label>
+                </div>
+                <input type='submit' value='Wyślij'>
+            </form>
+            <i class='icon-spin1 rotating' style='display: none'></i>
+        </section>
+        <section id="support">
+            <h3>Wsparcie autora</h3>
+            <p>
+                Jeżeli spodobało ci sie to narzędzie i uważasz je za przydatne, możesz mnie wesprzeć poprzez
+                <a href='https://www.paypal.com/paypalme/kamilimak' target="_blank">Paypal</a>.
+            </p>
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.js"
+        integrity="sha512-uLlukEfSLB7gWRBvzpDnLGvzNUluF19IDEdUoyGAtaO0MVSBsQ+g3qhLRL3GTVoEzKpc24rVT6X1Pr5fmsShBg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type='text/javascript' src='data/exchange_rates.js'></script>
+    <script type='text/javascript' src='data/stocks_countries.js'></script>
+    <script type='text/javascript' src='scripts/variables.js'></script>
+    <script type='text/javascript' src='scripts/colors.js'></script>
+    <script type='text/javascript' src='scripts/utils.js'></script>
+    <script type='text/javascript' src='scripts/classes.js'></script>
+    <script type='text/javascript' src='scripts/charts.js'></script>
+    <script type='text/javascript' src='scripts/visualisations.js'></script>
+    <script type='text/javascript' src='scripts/calculations_trading212.js'></script>
+    <script type='text/javascript' src='scripts/calculations.js'></script>
+</body>
+
+</html>
