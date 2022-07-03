@@ -3832,3 +3832,5 @@
 [07.04.2023 18:03:23 for key 2022-06-29] Couldn't find courses
 [07.04.2023 18:03:26 for key 2022-06-30] Couldn't find courses
 [07.04.2023 18:03:26 for key 2022-07-01] Couldn't find courses
+[07.04.2023 18:03:28 for key 2022-07-02] Date is a weekend or holiday, skipping update
+[07.04.2023 18:03:28 for key 2022-07-03] Date is a weekend or holiday, skipping update
