@@ -2,7 +2,9 @@
 
 import os
 import json
+import time
 import numpy
+import random
 import requests
 import datetime
 from bs4 import BeautifulSoup
@@ -56,7 +58,7 @@ def updateRatesLast():
     end_date = datetime.datetime.now() - datetime.timedelta(days=1)
     days = list(daterange(start_date, end_date))
     if len(days) == 0:
-        log(date_key, f'Found values already in all currencies, skipping update')
+        log('all', f'Found values already in all currencies, skipping update')
         return
     
     for date in days:
@@ -74,6 +76,7 @@ def updateRatesLast():
             rates[k][date_key] = v
         print(date_key, results)
     # save new rates
+    time.sleep(5)
     with open(RATES_FILE, 'w+') as f:
         f.write('exchange_rates = ')
         json.dump(rates, f, indent=4)
@@ -102,5 +105,18 @@ def getRateOfDay(day):
     return {}
 
 
+def commit():
+    date = datetime.datetime.now() - datetime.timedelta(days=1)
+    date_key = f'{date.year}-{date.month:02}-{date.day:02}'
+    # date_git = date_key + f"T{random.randint(0, 23):02}:{random.randint(0, 59):02}:{random.randint(0, 59):02}"
+    cmd = f"cd {DIR} && "
+    cmd += f"git add {RATES_FILE} {LOG_FILE} && "
+    cmd += f"git commit -m 'exchange rates update on {date_key}' && "
+    # cmd += f"GIT_AUTHOR_DATE={date_git} GIT_COMMITTER_DATE={date_git} git commit -m 'exchange rates update on {date_key}' && "
+    cmd += "git push"
+    os.system(cmd)
+
+
 if __name__ == '__main__':
     updateRatesLast()
+    commit()
