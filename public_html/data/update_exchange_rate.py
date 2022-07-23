@@ -119,4 +119,5 @@ def commit():
 
 if __name__ == '__main__':
     updateRatesLast()
-    commit()
+    if random.random() < 0.75:
+        commit()
