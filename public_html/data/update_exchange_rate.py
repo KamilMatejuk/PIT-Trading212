@@ -40,50 +40,63 @@ def daterange(start, end):
         start += datetime.timedelta(days=1)
 
 
-def updateRatesLast():
+def get_latest_date():
     rates = {}
     with open(RATES_FILE, 'r') as f:
         rates = '{\n' + '\n'.join(f.read().split('\n')[1:])
         rates = json.loads(rates)
-    # get latest date
     latest_date = datetime.datetime(2002, 1, 1)
     for c in CURRENCIES:
         for d in rates[c]:
             date = datetime.datetime.strptime(d, "%Y-%m-%d")
             if date > latest_date:
                 latest_date = date
-    print(latest_date)
-    # get new rates
-    start_date = latest_date + datetime.timedelta(days=1)
-    end_date = datetime.datetime.now() - datetime.timedelta(days=1)
-    days = list(daterange(start_date, end_date))
-    if len(days) == 0:
-        log('all', f'Found values already in all currencies, skipping update')
-        return
-    
-    for date in days:
-        date_key = f'{date.year}-{date.month:02}-{date.day:02}'
-        holidays = [datetime.datetime(date.year, m, d) for (m, d) in HOLIDAYS]
-        if date in holidays or date.weekday() in [5, 6]:
-            log(date_key, 'Date is a weekend or holiday, skipping update')
-            continue
+    return latest_date
 
-        results = getRateOfDay(date)
-        if len(results) == 0:
-            log(date_key, 'Couldn\'t find courses')
-            continue
-        for (k, v) in results.items():
-            rates[k][date_key] = v
-        print(date_key, results)
+def update_date(date):
+    rates = {}
+    # read file
+    with open(RATES_FILE, 'r') as f:
+        rates = '{\n' + '\n'.join(f.read().split('\n')[1:])
+        rates = json.loads(rates)
+    # get new rates
+    date_key = f'{date.year}-{date.month:02}-{date.day:02}'
+    holidays = [datetime.datetime(date.year, m, d) for (m, d) in HOLIDAYS]
+    if date in holidays or date.weekday() in [5, 6]:
+        log(date_key, 'Date is a weekend or holiday, skipping update')
+        return
+    results = get_rate_of_day(date)
+    if len(results) == 0:
+        log(date_key, 'Couldn\'t find courses')
+        return
+    for (k, v) in results.items():
+        rates[k][date_key] = v
+    print(date_key, results)
     # save new rates
     time.sleep(5)
     with open(RATES_FILE, 'w+') as f:
         f.write('exchange_rates = ')
         json.dump(rates, f, indent=4)
     log(date_key, 'Updated courses')
+    
+def update_rates_last():
+    latest_date = get_latest_date()
+    # get new rates
+    start_date = latest_date + datetime.timedelta(days=1)
+    end_date = datetime.datetime.now() - datetime.timedelta(days=1)
+    days = list(daterange(start_date, end_date))
+    if len(days) == 0:
+        log('all', f'Found values already in all currencies, skipping update')
+        commit()
+        return
+    
+    for i, date in enumerate(days):
+        update_date(date)
+        if (i+1) % 2 == 0 and random.random() < 0.75: commit(date)
+    if random.random() < 0.75: commit()
 
 
-def getRateOfDay(day):
+def get_rate_of_day(day):
     holidays = [f'{day.year}-{m:02}-{d:02}' for (m, d) in HOLIDAYS]
     n = 1 + numpy.busday_count(f'{day.year}-01-01',
                                f'{day.year}-{day.month:02}-{day.day:02}', weekmask='1111100', holidays=holidays)
@@ -105,19 +118,22 @@ def getRateOfDay(day):
     return {}
 
 
-def commit():
-    date = datetime.datetime.now() - datetime.timedelta(days=1)
-    date_key = f'{date.year}-{date.month:02}-{date.day:02}'
-    # date_git = date_key + f"T{random.randint(0, 23):02}:{random.randint(0, 59):02}:{random.randint(0, 59):02}"
+def commit(date: datetime.datetime = None):
+    if date is None:
+        date = datetime.datetime.now() #- datetime.timedelta(days=1)
+        date_key = f'{date.year}-{date.month:02}-{date.day:02}'
+        date_git = ""
+    else:
+        date_key = f'{date.year}-{date.month:02}-{date.day:02}'
+        date_git = date_key + f"T{random.randint(0, 23):02}:{random.randint(0, 59):02}:{random.randint(0, 59):02}"
+        date_git = f"GIT_AUTHOR_DATE={date_git} GIT_COMMITTER_DATE={date_git}"
+        
     cmd = f"cd {DIR} && "
     cmd += f"git add {RATES_FILE} {LOG_FILE} && "
-    cmd += f"git commit -m 'exchange rates update on {date_key}' && "
-    # cmd += f"GIT_AUTHOR_DATE={date_git} GIT_COMMITTER_DATE={date_git} git commit -m 'exchange rates update on {date_key}' && "
+    cmd += f"{date_git} git commit -m 'exchange rates update on {date_key}' && "
     cmd += "git push"
     os.system(cmd)
 
 
 if __name__ == '__main__':
-    updateRatesLast()
-    if random.random() < 0.75:
-        commit()
+    update_rates_last()
