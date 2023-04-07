@@ -1,0 +1,917 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: "MavenPro";
+}
+
+body {
+    position: relative;
+}
+
+#content {
+    width: 100%;
+    max-width: 1000px;
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+    padding-bottom: 5vh;
+}
+
+section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    margin: 3%;
+}
+
+h3 {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    margin: 3%;
+    width: 150%;
+    border-top: 5px double var(--accent-color);
+    border-bottom: 5px double var(--accent-color);
+    padding: 5%;
+}
+
+h4 {
+    text-align: center;
+    font-size: 1.2em;
+    margin: 3%;
+}
+
+h5 {
+    text-align: center;
+    margin: 3%;
+    font-size: 1em;
+}
+
+button {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    padding: 3% 10%;
+    margin: 3%;
+    font-size: 1.2em;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+p {
+    text-align: justify;
+}
+
+label {
+    text-align: justify;
+    display: inline-block;
+}
+
+input::placeholder {
+    color: var(--text-color);
+}
+
+input:-ms-input-placeholder {
+    color: var(--text-color);
+}
+
+input::-ms-input-placeholder {
+    color: var(--text-color);
+}
+
+input::-webkit-input-placeholder {
+    color: var(--text-color);
+}
+
+textarea::placeholder {
+    color: var(--text-color);
+}
+
+textarea:-ms-input-placeholder {
+    color: var(--text-color);
+}
+
+textarea::-ms-input-placeholder {
+    color: var(--text-color);
+}
+
+textarea::-webkit-input-placeholder {
+    color: var(--text-color);
+}
+
+input[type="email"] {
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+    appearance: textfield;
+}
+
+.error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    margin: 1em;
+    border: 2px solid #e95c5c;
+    background-color: #f2292951;
+    border-radius: 1em;
+    text-align: center;
+    color: #f26b6b;
+    font-weight: bold;
+}
+
+.error * {
+    background-color: transparent;
+    text-align: center;
+    color: #f26b6b;
+    font-weight: bold;
+}
+
+section#title {
+    height: 70vh;
+    position: relative;
+}
+
+section#title p {
+    position: absolute;
+    bottom: 0;
+    margin: 5%;
+    font-size: 0.9em;
+}
+
+section#services {
+    height: 25vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+section#services a {
+    display: block;
+    color: var(--bg-color);
+    background-color: var(--text-color);
+    padding: 5% 10%;
+    border-radius: 15px;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+section#upload .box {
+    width: 90%;
+    height: 25vh;
+    border-radius: 15px;
+    border: 2px dashed var(--text-color);
+    padding: 15px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section#upload .box h3 {
+    width: 15ch;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+section#upload .box input {
+    background: transparent;
+    color: transparent;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+
+section#upload .box input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+section#faq summary::-webkit-details-marker,
+section#faq summary::marker {
+    font-size: 0;
+}
+
+section#faq details {
+    width: 100%;
+}
+
+section#faq summary {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid var(--text-color);
+}
+
+section#faq summary h4 {
+    text-align: left;
+    width: 100%;
+    flex: 1;
+    margin: 3% 0;
+}
+
+section#faq summary i {
+    text-align: right;
+    background: transparent;
+    margin: 3% 0 3% 5%;
+    transition: all 0.3s;
+}
+
+section#faq details[open] summary i {
+    transform: rotate(180deg);
+}
+
+section#faq ul {
+    padding-inline-start: 2em;
+}
+
+section#faq p {
+    margin-top: 0.5em;
+}
+
+section#faq p span {
+    font-weight: bold;
+}
+
+section#faq img {
+    width: 90%;
+    border: 1px solid var(--text-color);
+    margin: 3% 5%;
+}
+
+section#faq h4 {
+    margin: 5% 0;
+}
+
+section#faq details>*:last-child {
+    margin-bottom: 10%;
+}
+
+section#timeframe form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+section#timeframe input[type="radio"] {
+    display: none;
+}
+
+section#timeframe label {
+    display: inline-block;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid var(--text-color);
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+section#timeframe input:checked+label {
+    font-weight: bold;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+section.all-stats div {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0.1em 0;
+}
+
+section.all-stats div .text {
+    text-align: left;
+    flex: 1;
+}
+
+section.all-stats div .value {
+    text-align: right;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-left: 0.5em;
+}
+
+section#all-stats div#stats-transfers-money-in .value,
+section#all-stats div#stats-dividends-profit .value,
+section#all-stats div#stats-stocks-profit .value,
+section#all-stats div#stats-stocks-biggest-profit .value,
+section#all-stats div#stats-stocks-avg-profit .value,
+section#stock-detail-stats div#stats-detail-biggest-profit .value {
+    color: var(--green);
+}
+
+section#all-stats div#stats-transfers-money-out .value,
+section#all-stats div#stats-stocks-loss .value,
+section#all-stats div#stats-stocks-biggest-loss .value,
+section#all-stats div#stats-stocks-avg-loss .value,
+section#stock-detail-stats div#stats-detail-biggest-loss .value {
+    color: var(--red);
+}
+
+section#all-stats div#stats-stocks-sell-nr,
+section#all-stats div#stats-stocks-avg-profit,
+section#all-stats div#stats-stocks-avg-loss {
+    margin-bottom: 1em;
+}
+
+section#all-graphs div {
+    width: 100%;
+}
+
+section#all-graphs p {
+    margin: 0.5em;
+}
+
+section#all-graphs canvas {
+    margin: 0 0.5em 2em 0.5em;
+}
+
+section#stock-select select {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+    outline: none;
+    text-align: center;
+    grid-area: select;
+}
+
+section#stock-select .select {
+    width: 100%;
+    min-width: 15ch;
+    max-width: 20ch;
+    border: 1px solid var(--text-color);
+    border-radius: 0.25em;
+    padding: 0.25em 0;
+    font-size: 1.25rem;
+    cursor: pointer;
+    line-height: 1.1;
+    background-color: transparent;
+    display: grid;
+    grid-template-areas: "select";
+    align-items: center;
+    margin-top: 5%;
+}
+
+section#stock-select .select::after {
+    content: "";
+    width: 0.8em;
+    height: 0.5em;
+    margin-right: 0.5em;
+    background-color: var(--text-color);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    grid-area: select;
+    justify-self: end;
+}
+
+section#stock-select select * {
+    text-align: center;
+}
+
+section#stock-detail-operations>div {
+    width: 100%;
+}
+
+section#stock-detail-operations>div>div {
+    width: 100%;
+    height: 6em;
+    display: grid;
+    grid-template-columns: 1fr 6em 1fr;
+}
+
+section#stock-detail-operations>div>div:first-of-type {
+    height: 2em;
+    font-weight: bold;
+}
+
+section#stock-detail-operations>div>div:first-of-type p {
+    color: var(--accent-color);
+}
+
+section#stock-detail-operations>div>div:last-of-type .line-bottom {
+    display: none;
+}
+
+section#stock-detail-operations .text {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section#stock-detail-operations .text p {
+    text-align: center;
+}
+
+section#stock-detail-operations .starting-dot,
+section#stock-detail-operations .center-dot {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+section#stock-detail-operations .starting-dot .dot {
+    height: 0.6em;
+    width: 0.6em;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+section#stock-detail-operations .starting-dot .line {
+    width: 0.2em;
+    height: 50%;
+    background-color: var(--accent-color);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
+}
+
+section#stock-detail-operations .center-dot .dot {
+    height: 80%;
+    width: 80%;
+    background-color: var(--bg-color);
+    border: 0.2em solid var(--accent-color);
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+section#stock-detail-operations .center-dot p {
+    width: 100%;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: transparent;
+    /* font-weight: bold; */
+}
+
+section#stock-detail-operations .buy .center-dot p {
+    color: var(--red);
+}
+
+section#stock-detail-operations .sell .center-dot p {
+    color: var(--green);
+}
+
+section#stock-detail-operations .center-dot .line-top {
+    width: 0.2em;
+    height: 10%;
+    background-color: var(--accent-color);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+section#stock-detail-operations .center-dot .line-bottom {
+    width: 0.2em;
+    height: 10%;
+    background-color: var(--accent-color);
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+}
+
+section#stock-detail-operations .center-dot .line-across {
+    width: 1em;
+    height: 1em;
+    border-top: 0.5em solid transparent;
+    border-bottom: 0.5em solid transparent;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+section#stock-detail-operations .buy .center-dot .line-across {
+    border-left: 0.5em solid var(--accent-color);
+    right: -0.5em;
+}
+
+section#stock-detail-operations .sell .center-dot .line-across {
+    border-right: 0.5em solid var(--accent-color);
+    left: -0.5em;
+}
+
+section#taxes>div #stocks-ds {
+    display: inline;
+    font-weight: normal;
+    color: var(--text-color);
+}
+
+section#taxes>div span {
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+section#taxes .pit-38-g,
+section#taxes .pit-38-c {
+    border: 1px solid #000;
+    background: #ddd;
+    padding-top: 0.1em;
+}
+
+section#taxes .pit-38-g *,
+section#taxes .pit-38-c * {
+    background: transparent;
+    color: #000;
+}
+
+section#taxes .pit-38-g>div:first-child,
+section#taxes .pit-38-c>div:first-child {
+    font-weight: bold;
+    padding: 0.1em 0.5em;
+}
+
+section#taxes .pit-38-g>div:nth-child(2) {
+    margin-left: 5%;
+    border-left: 1px solid #000;
+    border-top: 1px solid #000;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+section#taxes .pit-38-g>div:nth-child(2)>p {
+    padding: 0.2em;
+    border-bottom: 1px solid #000;
+    margin: 0;
+}
+
+section#taxes .pit-38-g>div:nth-child(2)>div {
+    background: #eee;
+    border-bottom: 1px solid #000;
+    border-left: 1px solid #000;
+    position: relative;
+}
+
+section#taxes .pit-38-g>div:nth-child(2)>div .nr {
+    padding: 0.1em;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+section#taxes .pit-38-g>div:nth-child(2)>div .tax {
+    font-size: 1.2em;
+    font-weight: bold;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    right: 0.5em;
+    color: var(--accent-color);
+}
+
+section#taxes .pit-38-c>div:nth-child(2) {
+    margin-left: 5%;
+    border-left: 1px solid #000;
+    border-top: 1px solid #000;
+    display: grid;
+    grid-template-areas:
+        "t1 t2 t3 t4 t5"
+        "a1 a2 a3 a4 a5"
+        "q1 f0 f1 e1 e2"
+        "q2 f2 f3 e1 e2"
+        "q3 f4 f5 f6 f7";
+    grid-template-columns: repeat(5, 1fr);
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>* {
+    word-wrap: break-word;
+    width: 17vw;
+    padding: 0.1em;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(1) {
+    grid-area: t1;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(2) {
+    grid-area: t2;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(3) {
+    grid-area: t3;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(4) {
+    grid-area: t4;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(5) {
+    grid-area: t5;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(6) {
+    grid-area: a1;
+    text-align: center;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(7) {
+    grid-area: a2;
+    text-align: center;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(8) {
+    grid-area: a3;
+    text-align: center;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(9) {
+    grid-area: a4;
+    text-align: center;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(10) {
+    grid-area: a5;
+    text-align: center;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(11) {
+    grid-area: q1;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(12) {
+    grid-area: q2;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(13) {
+    grid-area: q3;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(14) {
+    grid-area: e1;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(15) {
+    grid-area: e2;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(16) {
+    grid-area: f0;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(17) {
+    grid-area: f1;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(18) {
+    grid-area: f2;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(19) {
+    grid-area: f3;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(20) {
+    grid-area: f4;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(21) {
+    grid-area: f5;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(22) {
+    grid-area: f6;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(23) {
+    grid-area: f7;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(1),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(2),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(3),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(4),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(5),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(6),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(7),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(8),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(9),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(10),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(11),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(12),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(14),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(15),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(16),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(17),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(18),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(19) {
+    border-bottom: 1px solid #000;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(2),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(3),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(4),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(5),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(7),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(8),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(9),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(10),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(14),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(15),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(16),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(17),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(18),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(19),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(20),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(21),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(22),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(23) {
+    border-left: 1px solid #000;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(16),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(17),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(18),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(19),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(20),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(21),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(22),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(23) {
+    background: #eee;
+    position: relative;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(16) .nr,
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(17) .nr,
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(18) .nr,
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(19) .nr,
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(20) .nr,
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(21) .nr,
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(22) .nr,
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(23) .nr {
+    padding: 0.1em;
+    font-size: 0.8em;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(16) .tax,
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(17) .tax,
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(18) .tax,
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(19) .tax,
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(20) .tax,
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(21) .tax,
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(22) .tax,
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(23) .tax {
+    font-size: 0.8em;
+    font-weight: bold;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    right: 0.2em;
+    color: var(--accent-color);
+}
+
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(20),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(21),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(22),
+section#taxes .pit-38-c>div:nth-child(2)>*:nth-child(23) {
+    height: 3em;
+}
+
+section#taxes .pit-zg-b>div:nth-child(2) {
+    height: 4em;
+}
+
+section#taxes .pit-zg-b>div:nth-child(2) .tax {
+    font-size: 1em !important;
+    top: 65% !important;
+}
+
+section#taxes .pits-zg p {
+    margin: 3% 0;
+}
+
+section#contact {
+    position: relative;
+}
+
+section#contact input,
+section#contact textarea {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid var(--text-color);
+    padding: 0.5em;
+    font-size: 1em;
+    margin: 3% 0;
+    text-align: center;
+}
+
+section#contact form>div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+section#contact form>div input {
+    width: 30vw;
+    margin: 0 3% 0 0;
+}
+
+section#contact form>div label {
+    font-size: 0.8em;
+}
+
+section#contact .icon-spin1 {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 60%;
+    left: 50%;
+    font-size: 5em;
+    background: transparent;
+}
+
+section#contact .icon-spin1:before {
+    color: var(--accent-color);
+    background: transparent;
+}
+
+@-webkit-keyframes rotating
+
+/* Safari and Chrome */
+    {
+    from {
+        -webkit-transform: translate(-50%, -50%) rotate(0deg);
+        -o-transform: translate(-50%, -50%) rotate(0deg);
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: translate(-50%, -50%) rotate(360deg);
+        -o-transform: translate(-50%, -50%) rotate(360deg);
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes rotating {
+    from {
+        -ms-transform: translate(-50%, -50%) rotate(0deg);
+        -moz-transform: translate(-50%, -50%) rotate(0deg);
+        -webkit-transform: translate(-50%, -50%) rotate(0deg);
+        -o-transform: translate(-50%, -50%) rotate(0deg);
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        -ms-transform: translate(-50%, -50%) rotate(360deg);
+        -moz-transform: translate(-50%, -50%) rotate(360deg);
+        -webkit-transform: translate(-50%, -50%) rotate(360deg);
+        -o-transform: translate(-50%, -50%) rotate(360deg);
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.rotating {
+    -webkit-animation: rotating 2s linear infinite;
+    -moz-animation: rotating 2s linear infinite;
+    -ms-animation: rotating 2s linear infinite;
+    -o-animation: rotating 2s linear infinite;
+    animation: rotating 2s linear infinite;
+}
