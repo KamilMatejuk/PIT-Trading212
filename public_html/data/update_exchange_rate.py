@@ -123,7 +123,7 @@ def update_date(date, rates_df):
         rates[k][date_key] = v
     print(date_key, results)
     # save new rates
-    time.sleep(5)
+    time.sleep(0.5)
     with open(RATES_FILE, 'w+') as f:
         f.write('exchange_rates = ')
         json.dump(rates, f, indent=4)
