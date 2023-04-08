@@ -70,7 +70,7 @@ def update_rates_last():
     rates_df = download_for_dates(start_date, end_date)
     for i, date in enumerate(days):
         update_date(date, rates_df)
-        if date > datetime.datetime(2020, 1, 1) and random.random() < 0.7: commit(date)
+        if i%2 == 0 and date > datetime.datetime(2020, 1, 1) and random.random() < 0.66: commit(date)
     if random.random() < 0.75: commit()
 
 
@@ -88,16 +88,21 @@ def download_for_dates(start_date, end_date):
             if c.lower() == 'data':
                 df_y.rename(columns = {c: 'data'}, inplace = True)
                 df_y = df_y[df_y['data'].notna()]
-                df_y['data'] = df_y['data'].apply(lambda x: str(x)[6:] + '.' + str(x)[4:6] + '.' + str(x)[:4])
+                def parse_date(x):
+                    x = str(x).split('.')[0]
+                    return f'{x[6:]}.{x[4:6]}.{x[:4]}'
+                df_y['data'] = df_y['data'].apply(parse_date)
                 continue
             for curr in CURRENCIES:
                 if curr.lower() in c.lower():
                     df_y.rename(columns = {c: curr}, inplace = True)
+                    df_y[curr] = df_y[curr].apply(lambda x: float(x.replace(',', '.')))
                     break
             else: df_y.drop([c], axis=1, inplace=True)
         df = pd.concat([df, df_y])
         os.remove(DOWNLOAD)
     df.reset_index(inplace=True)
+    df.drop(['index'], axis=1, inplace=True)
     return df
 
 
@@ -123,7 +128,7 @@ def update_date(date, rates_df):
         rates[k][date_key] = v
     print(date_key, results)
     # save new rates
-    time.sleep(0.5)
+    # time.sleep(0.5)
     with open(RATES_FILE, 'w+') as f:
         f.write('exchange_rates = ')
         json.dump(rates, f, indent=4)
