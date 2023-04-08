@@ -8651,6 +8651,7 @@ stocks_countries = {
     "RUBY": "Stany Zjednoczone Ameryki",
     "RUHN": "Stany Zjednoczone Ameryki",
     "RUI": "Francja",
+    "RUM": "Stany Zjednoczone Ameryki",
     "RUN": "Stany Zjednoczone Ameryki",
     "RUSB": "Wielka Brytania",
     "RUSE": "Wielka Brytania",

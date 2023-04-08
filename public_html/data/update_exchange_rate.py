@@ -140,7 +140,7 @@ def get_rate_of_day(day, rates_df):
     if len(rate_row) == 0: return {}
     results = {}
     for curr in CURRENCIES:
-        results[curr] = float(rate_row[curr].iloc[0].replace(',', '.'))
+        results[curr] = float(rate_row[curr].iloc[0])
     return results
 
 
