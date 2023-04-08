@@ -125,6 +125,7 @@ function show_taxes_stocks(income, cost, profit_by_country, not_found) {
     }
 
     let div = document.querySelector('#taxes > div:last-of-type > div:last-of-type')
+    if (!div) return // coinbase doesn't have division by country
     div.innerHTML = ''
     for (let country in profit_by_country) {
         let profit = profit_by_country[country]
@@ -144,7 +145,7 @@ function show_taxes_stocks(income, cost, profit_by_country, not_found) {
                         <p>Dochód, o którym mowa w art. 30b ust. 5a i 5b ustawy</p>
                         <div><p class='nr'>32.</p><p class='tax' id='tax32'>${show_monetary_value(profit)}</p></div>
                         <p>Podatek zapłacony za granicą od dochodów z poz. 32</p>
-                        <div><p class='nr'>33.</p><p class='tax' id='tax33'>${show_monetary_value(profit)}</)p></div>
+                        <div><p class='nr'>33.</p><p class='tax' id='tax33'>${show_monetary_value(0.0)}</)p></div>
                         <p>Dochód, o którym mowa w art. 30b ust.5e i 5f ustawy</p>
                         <div><p class='nr'>34.</p><p class='tax'></p></div>
                         <p>Podatek zapłacony za granicą od dochodów z poz. 34</p>
